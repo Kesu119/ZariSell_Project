@@ -1,5 +1,4 @@
 import orderModel from "../models/orderModel.js";
-import userModel from "../models/userModel.js";
 
 // Placing user order
 const placeOrder = async (req, res) => {
@@ -7,7 +6,6 @@ const placeOrder = async (req, res) => {
   const userId = req.userId; // User ID from the auth middleware
 
   try {
-    // Create a new order and link it to the logged-in user
     const newOrder = new orderModel({
       userId,
       productname,
@@ -18,7 +16,6 @@ const placeOrder = async (req, res) => {
       date,
       paymode,
     });
-
     await newOrder.save();
     res.json({ success: true, message: "Order added successfully." });
   } catch (error) {

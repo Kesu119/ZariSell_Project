@@ -4,9 +4,14 @@ import { getAllRequirements, userRequirement } from "../controller/requirementCo
 
 const requirementRouter=express.Router()
 
-requirementRouter.post("/addrequirement",userRequirement);
-requirementRouter.get("/getrequirement",getAllRequirements);
+requirementRouter.post("/addrequirement",authMiddleware,userRequirement);
+requirementRouter.get("/getrequirement",authMiddleware,getAllRequirements);
 export default requirementRouter;
+
+
+
+
+
 
 
 

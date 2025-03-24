@@ -3,19 +3,19 @@ import requirementModel from "../models/requirementModel.js";
 
 //add user requirement
 const userRequirement=async(req,res)=>{
-    const frontend_url="http://localhost:3000";
+    const {fullname,email,phone,meeting,packing,packing2,additional}=req.body;
+    const userId= req.userId;
+    try{
     const RequirementOrder=new requirementModel({
-        // userId:req.body.userId,
-
-        fullname:req.body.fullname,
-        email:req.body.email,
-        phone:req.body.phone,
-        meeting:req.body.meeting,
-        packing:req.body.packing,
-        packing2:req.body.packing2,
-        additional:req.body.additional
-    })
-    try {
+        userId,
+        fullname,
+        email,
+        phone,
+        meeting,
+        packing,
+        packing2,
+        additional,
+    });
         await RequirementOrder.save();
         res.json({success:true,message:"requirement add"})
     } catch (error) {
@@ -26,9 +26,10 @@ const userRequirement=async(req,res)=>{
 
 //get all requirement controller
  const getAllRequirements = async (req, res) => {
+  const userId = req.userId;
     try {
-      const requirements = await requirementModel.find().sort({ createdAt: -1 }); // Sort by latest submission first
-      return res.json({ success: true,data: requirements,});
+      const requirements = await requirementModel.find({userId}).sort({ createdAt: -1 }); // Sort by latest submission first
+      return res.json({ success: true,data: requirements});
     } catch (err) {
       console.error(err);
     return res.json({success: false,message: 'An error occurred while fetching the requirements'});

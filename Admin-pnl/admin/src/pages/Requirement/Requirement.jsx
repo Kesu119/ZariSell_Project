@@ -10,14 +10,28 @@ const Requirement = () => {
 
       useEffect(() => {
         const fetchRequirements = async () => {
-      
-        const response=await axios.get('http://localhost:5000/api/requirement/getrequirement')
+          const token = localStorage.getItem('token');
+
+          if (!token) {
+                  toast.error('You need to be logged in to view orders');
+                  return;
+                }
+      try{
+        const response=await axios.get('http://localhost:5000/api/requirement/getrequirement',{
+          headers: {
+            'Authorization': `Bearer ${token}`,  
+          },
+        });
                 console.log(response.data)
                 if(response.data.success){
                 setRequirements(response.data.data)
                 }else{
                     toast.error("Error")
                 }
+        } catch (error) {
+               console.error('Error fetching orders:', error);
+               toast.error('An error occurred while fetching orders');
+              }
         };
     
         fetchRequirements();
