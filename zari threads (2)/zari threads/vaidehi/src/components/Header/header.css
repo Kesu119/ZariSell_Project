@@ -86,7 +86,7 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
-.sign
+/* .sign
 {
     background-color: transparent;
     color: goldenrod;
@@ -98,7 +98,7 @@
 }
 .sign:hover{
     background-color: rgb(247, 244, 229);
-}
+} */
 
 /* Offcanvas Sidebar */
 .offcanvas {

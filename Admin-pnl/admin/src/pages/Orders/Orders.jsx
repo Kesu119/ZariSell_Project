@@ -18,7 +18,7 @@ const Orders = () => {
       try {
         const response = await axios.get('http://localhost:5000/api/order/getorder', {
           headers: {
-            'Authorization': `Bearer ${token}`,  // Include the token in the header
+            'Authorization': `Bearer ${token}`,  
           },
         });
 

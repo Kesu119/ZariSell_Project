@@ -5,11 +5,11 @@ import { toast } from 'react-toastify'
 const Requirement = () => {
 
     const [requirements, setRequirements] = useState([]);
-    //   const [loading, setLoading] = useState(true);
-    //   const [error, setError] = useState('');
+    
 
       useEffect(() => {
         const fetchRequirements = async () => {
+
           const token = localStorage.getItem('token');
 
           if (!token) {
@@ -22,7 +22,7 @@ const Requirement = () => {
             'Authorization': `Bearer ${token}`,  
           },
         });
-                console.log(response.data)
+              console.log(response.data);
                 if(response.data.success){
                 setRequirements(response.data.data)
                 }else{

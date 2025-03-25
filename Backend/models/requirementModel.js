@@ -1,8 +1,7 @@
 import mongoose from "mongoose"
 
 const requirementSchema=new mongoose.Schema({
-    // userId:{type:String,required:true},
-   
+   userId: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
     fullname:{type:String,required:true},
     email:{type:String,required:true},
     phone:{type:String,required:true},

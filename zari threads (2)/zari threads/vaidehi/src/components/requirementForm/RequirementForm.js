@@ -6,16 +6,24 @@ import { toast } from 'react-toastify';
 
 function RequirementForm() {
   const [meetingType, setMeetingType] = useState("");
+  const [fullname,setFullname]=useState("");
+  const [email,setEmail]=useState("");
+  const [phone,setPhone]=useState("");
+  const [meeting,setMeeting]=useState("");
+  const[packing,setPacking]=useState("");
+  const[packing2,setPacking2]=useState("");
+  const [additional,setAdditional]=useState("");
   const url = "http://localhost:5000";
   const [error, setError] = useState("");
+
   const [data, setData] = useState({
-    fullname: "",
-    email: "",
-    phone: "",
-    meeting: "select",  
-    packing: "select",  
-    packing2: "select", 
-    additional: ""
+    fullname: fullname,
+    email: email,
+    phone: phone,
+    meeting: meeting,  
+    packing: packing,  
+    packing2: packing2, 
+    additional:additional,
   });
 
   const onChangeHandler = (event) => {
@@ -26,12 +34,19 @@ function RequirementForm() {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token'); // Get JWT token from localStorage
+    
+        if (!token) {
+          toast.error("You must be logged in to place an order.");
+          return;
+        }
     try {
       const response = await axios.post(
         `${url}/api/requirement/addrequirement`,
-        data, // Send data as JSON
+        data, 
         {
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         }
@@ -41,9 +56,9 @@ function RequirementForm() {
           fullname: "",
           email: "",
           phone: "",
-          meeting: "select",
-          packing: "select",
-          packing2: "select",
+          meeting: "",
+          packing: "",
+          packing2: "",
           additional: "",
         });
         toast.success(response.data.message);
@@ -137,28 +152,25 @@ function RequirementForm() {
             {/* Other options */}
             <option value="200">200</option>
             <option value="210">210</option>
-            <option value="260">220</option>
-            <option value="260">230</option>
-            <option value="260">240</option>
-            <option value="260">250</option>
+            <option value="220">220</option>
+            <option value="230">230</option>
+            <option value="240">240</option>
+            <option value="250">250</option>
             <option value="260">260</option>
-            <option value="260">270</option>
-            <option value="260">280</option>
-            <option value="260">290</option>
-            <option value="260">300</option>
-            <option value="260">310</option>
-            <option value="260">320</option>
-            <option value="260">330</option>
-            <option value="260">340</option>
-            <option value="260">350</option>
-            <option value="260">360</option>
-            <option value="260">370</option>
-            <option value="260">380</option>
-            <option value="260">390</option>
-            <option value="260">400</option>
-            
-
-            {/* ... */}
+            <option value="270">270</option>
+            <option value="280">280</option>
+            <option value="290">290</option>
+            <option value="300">300</option>
+            <option value="310">310</option>
+            <option value="320">320</option>
+            <option value="330">330</option>
+            <option value="340">340</option>
+            <option value="350">350</option>
+            <option value="360">360</option>
+            <option value="370">370</option>
+            <option value="380">380</option>
+            <option value="390">390</option>
+            <option value="400">400</option>
           </select>
         </div>
 
