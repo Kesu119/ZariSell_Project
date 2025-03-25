@@ -16,12 +16,13 @@ const Orders = () => {
       }
       
       try {
-        const response = await axios.get('http://localhost:5000/api/order/getorder', {
+        const response = await axios.get('http://localhost:5000/api/order/getorder'
+        , {
           headers: {
             'Authorization': `Bearer ${token}`,  
           },
         });
-
+        console.log(response.data);
         if (response.data.success) {
           setOrder(response.data.data);
         } else {

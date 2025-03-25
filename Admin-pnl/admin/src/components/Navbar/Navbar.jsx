@@ -28,7 +28,7 @@ const [token,setToken]=useState('');
 
        <div className='button'>
               {/* <i className="fa-solid fa-phone"/>+91 11111-22222 */}
-              {!token?<button onClick={()=>setShowLogin(true)} className='sign'>Sign in</button>
+              {!token?<button onClick={()=>setShowLogin(true)} className='signin'>Sign in</button>
               :<div className='navbar-profile'>
                 <img src={assets.profile_icon} alt=""/>
                 <ul className='nav-profile-dropdown'>

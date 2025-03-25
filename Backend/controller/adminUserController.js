@@ -8,17 +8,17 @@ import adminUserModel from "../models/adminUserModel.js";
 const loginUser=async(req,res)=>{
     const {email,password}=req.body;
     try {
-        const user= await adminUserModel.findOne({email});
-        if(!user){
+        const admin= await adminUserModel.findOne({email});
+        if(!admin){
             return res.json({success:false,message:"user dosen't exist"})
         }
 
-        const isMatch=await bcrypt.compare(password,user.password);
+        const isMatch=await bcrypt.compare(password,admin.password);
         if(!isMatch){
             return res.json({success:false,message:"Invalid User"})
         }
 
-        const token=createToken(user._id);
+        const token=createToken(admin._id);
         res.json({success:true,token})
     } catch (error) {
         console.log(error);
@@ -59,8 +59,8 @@ const registerUser=async(req,res)=>{
             password:hashedPassword
         })
 
-        const user=await newUser.save()
-        const token=createToken(user._id)
+        const admin=await newUser.save()
+        const token=createToken(admin._id)
         res.json({success:true,token});
     } catch (error) {
         console.log(error);

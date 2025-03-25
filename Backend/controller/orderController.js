@@ -26,11 +26,11 @@ const placeOrder = async (req, res) => {
 
 // Get all orders for the logged-in user
 const getAllOrder = async (req, res) => {
-  const userId = req.userId; // User ID from the auth middleware
+  // const userId = req.userId; // User ID from the auth middleware
 
   try {
     // Fetch only the orders for the logged-in user
-    const orders = await orderModel.find({ userId }).sort({ createdAt: -1 }); // Sort by latest first
+    const orders = await orderModel.find({ }).sort({ createdAt: -1 }); // Sort by latest first
     res.json({ success: true, data: orders });
   } catch (err) {
     console.error(err);

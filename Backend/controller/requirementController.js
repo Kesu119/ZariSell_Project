@@ -26,9 +26,9 @@ const userRequirement=async(req,res)=>{
 
 //get all requirement controller
  const getAllRequirements = async (req, res) => {
-  const userId = req.userId;
+  
     try {
-      const requirements = await requirementModel.find({userId}).sort({ createdAt: -1 }); // Sort by latest submission first
+      const requirements = await requirementModel.find({}).sort({ createdAt: -1 }); // Sort by latest submission first
       return res.json({ success: true,data: requirements});
     } catch (err) {
       console.error(err);

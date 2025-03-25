@@ -9,5 +9,5 @@ const adminSchema=new mongoose.Schema({
     {minimize:false}
 )
 
-const adminUserModel=mongoose.models.user||mongoose.model("admin",adminSchema);
+const adminUserModel=mongoose.models.admin||mongoose.model("admin",adminSchema);
 export default adminUserModel;

@@ -13,7 +13,7 @@ const Requirement = () => {
           const token = localStorage.getItem('token');
 
           if (!token) {
-                  toast.error('You need to be logged in to view orders');
+                  toast.error('You need to be logged in to view Reuirement');
                   return;
                 }
       try{
@@ -29,8 +29,8 @@ const Requirement = () => {
                     toast.error("Error")
                 }
         } catch (error) {
-               console.error('Error fetching orders:', error);
-               toast.error('An error occurred while fetching orders');
+               console.error('Error fetching Requirement:', error);
+               toast.error('An error occurred while fetching Requirement');
               }
         };
     
