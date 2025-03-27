@@ -49,5 +49,30 @@ catch(error)
     res.json({success:false,message:"error"})
 
 }
+}//update product item
+const updateProduct=async(req,res)=>{
+    try{
+        const product=await productModel.findById(req.body.id);
+        if(!product){
+            return res.json({success:false,message:"product not found"});
+        }
+
+        let image_filename=product.image;
+        if(req.file){
+            fs.unlink(`uplods/${product.image}`,()=>{});
+            image_filename=req.file.filename;
+        }
+
+        const updatedProduct=await productModel.findByIdAndUpdate(req.body.id,{
+            name:req.body.name,
+            price:req.body.price,
+            category:req.body.category,
+            image:image_filename
+        },{new:true});
+        res.json({success:"product update done",data:updatedProduct})
+    }catch(error){
+        console.log(error);
+        res.json({success:false,message:"error"})
+    }
 }
-export {addProduct,listProduct,removeProduct};
+export {addProduct,listProduct,removeProduct,updateProduct};
