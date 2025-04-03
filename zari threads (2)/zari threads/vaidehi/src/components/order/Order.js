@@ -10,7 +10,7 @@ function Order() {
   const [qty, setQty] = useState(250);
   const [amount, setAmount] = useState(0);
   const [address, setAddress] = useState("");
-  const [status, setStatus] = useState("Pending");
+  // const [status, setStatus] = useState("Pending");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [payment, setPayment] = useState("");
   const navigate=useNavigate();
@@ -23,7 +23,7 @@ function Order() {
     qty: qty,
     amount: amount,
     address: address,
-    status: status,
+    // status: status,
     date: date,
     paymode: payment,
   });
@@ -68,7 +68,7 @@ function Order() {
           qty: "",
           amount: "",
           address: "",
-          status: "",
+          // status: "",
           date: "",
           paymode: "",
         });
@@ -144,7 +144,7 @@ function Order() {
           />
         </div>
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label className="form-label">Status:</label>
           <input
             type="text"
@@ -154,7 +154,7 @@ function Order() {
             className="form-control"
             readOnly
           />
-        </div>
+        </div> */}
 
         <div className="mb-3">
           <label className="form-label">Date:</label>

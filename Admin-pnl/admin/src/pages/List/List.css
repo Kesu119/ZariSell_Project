@@ -10,6 +10,7 @@
 }
 .pname{
     font-size: 30px;
+    align-items: center;
 }
 .list-table .title {
     background-color:darkgoldenrod;

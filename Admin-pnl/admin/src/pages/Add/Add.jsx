@@ -10,10 +10,10 @@ const Add = ({url}) => {
   const [image,setImage]=useState(false);
   const [data,setData]=useState({
     name:"",
-    // description:"",
+     description:"",
     // qty:"",
     price:"",
-    category:"Limitation _Jari"
+    // category:"Limitation _Jari"
   })
 
   const onChangeHandler=(event)=>{
@@ -26,19 +26,19 @@ const Add = ({url}) => {
     event.preventDefault();
 const formData=new FormData();
 formData.append("name",data.name);
-// formData.append("description",data.description);
+formData.append("description",data.description);
 // formData.append("qty",Number(data.qty));
 formData.append("price",Number(data.price));
-formData.append("category",data.category)
+// formData.append("category",data.category)
 formData.append("image",image);
   const response=await axios.post(`${url}/api/product/add`,formData);
   if(response.data.success){
   setData({
     name:"",
-    // description:"",
+    description:"",
     // qty:"",
     price:"",
-    category:"Limitation _Jari"
+    // category:"Limitation _Jari"
   })
   setImage(false)
   toast.success(response.data.message)
@@ -64,12 +64,12 @@ formData.append("image",image);
           <input onChange={onChangeHandler} value={data.name} type='text' name='name' placeholder='Enter name' required/>
         </div>
 
-        {/* <div className='add-product-desc'>
+        <div className='add-product-desc'>
           <p>Product Description</p>
           <textarea  onChange={onChangeHandler} value={data.description} name='description' rows='6' placeholder='Write Here' required></textarea>
-        </div> */}
+        </div>
 
-        <div className="add-category">
+        {/* <div className="add-category">
             <p> Product Category</p>
             <select onChange={onChangeHandler} name='category'>
               <option>Select_Imitation_jari</option>
@@ -79,7 +79,7 @@ formData.append("image",image);
               <option value='silver colour'>Imitation Jari Silver color</option>
               <option value='cone'>Imitation Jari Cone</option>
             </select>
-          </div>
+          </div> */}
 
       <div className='add-both'>
         {/* <div className='add-product-qty'>
@@ -101,3 +101,25 @@ formData.append("image",image);
 }
 
 export default Add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

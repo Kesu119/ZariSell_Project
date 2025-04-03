@@ -8,6 +8,7 @@ const orderRouter =express.Router();
 orderRouter.get("/getorder",authMiddleware,getAllOrder)
 orderRouter.post("/addorder",authMiddleware,placeOrder)
 orderRouter.post("/status",updateStatus)
+// orderRouter.post("/userorders",authMiddleware,userOrders)
 export default orderRouter;
 
 

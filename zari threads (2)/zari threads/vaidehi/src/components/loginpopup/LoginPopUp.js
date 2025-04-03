@@ -64,8 +64,7 @@ function LoginPopUp({ setShowLogin }) {
           else{
             alert(response.data.message)
           }
-        
-        
+          
   };
 
   return (

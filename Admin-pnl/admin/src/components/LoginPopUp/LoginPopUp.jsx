@@ -13,7 +13,7 @@ function LoginPopUp({ setShowLogin }) {
   const validateForm = () => {
     let formErrors = {};
     if (currState === 'Sign Up' && !formData.username) {
-      formErrors.username = 'Username is required';
+      formErrors.username = 'Admin is required';
     }
     if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       formErrors.email = 'Valid email is required';

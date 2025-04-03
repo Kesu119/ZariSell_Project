@@ -169,6 +169,7 @@ function Header({ setShowLogin }) {
                 <Link to='/crap'>Imitation Zari crape quality</Link>
                 <Link to='/silver'>Imitation Zari silver quality</Link>
                 <Link to='/cone'>Imitation Zari cone</Link>
+                <Link to ='/other'>Other product</Link>
               </div>
             )}
           </a>
@@ -176,7 +177,6 @@ function Header({ setShowLogin }) {
 
 
          <div className='button'>
-                {/* <i className="fa-solid fa-phone"/>+91 11111-22222 */}
                 {!token?<button onClick={()=>setShowLogin(true)} className='signin'>Sign in</button>
                 :<div className='navbar-profile'>
                   <img src={assets.profile_icon} alt=""/>

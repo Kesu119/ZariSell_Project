@@ -20,6 +20,8 @@ import Review from './components/review/Review';
 import Cart from './page/cart/Cart';
 import PlaceOrder from './page/PlaceOrder/PlaceOrder';
 import Order from './components/order/Order';
+import Other from './components/other/Other';
+import MyOrder from './components/myOrder/MyOrder';
 
 function App() {
   const [showLogin,setShowLogin]=useState(false)
@@ -43,7 +45,10 @@ function App() {
         <Route exact path='/cone' element={<Cone/>}/>
         <Route exact path='/crap' element={<Crap/>}/>
         <Route exact path='/review' element={<Review/>}/>
+        <Route exact path='/other' element={<Other/>}/>
+        <Route exact path='/myOrder' element={<MyOrder/>}/>
         <Route exact path='/order/:productName' element={<Order/>}/>
+        
 
       </Routes>
     <Footer/>

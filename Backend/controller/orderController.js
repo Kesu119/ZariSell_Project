@@ -2,19 +2,22 @@ import orderModel from "../models/orderModel.js";
 
 // Placing user order
 const placeOrder = async (req, res) => {
-  const { productname, qty, amount, address, status, date, paymode } = req.body;
-  const userId = req.userId; // User ID from the auth middleware
+  const {username,email,phone, productname, qty, amount, address, status, date} = req.body;
+   const userId = req.userId; 
 
   try {
     const newOrder = new orderModel({
-      userId,
+       userId,
+      username,
+      email,
+      phone,
       productname,
       qty,
       amount,
       address,
       status,
       date,
-      paymode,
+      // paymode,
     });
     await newOrder.save();
     res.json({ success: true, message: "Order added successfully." });
@@ -26,11 +29,9 @@ const placeOrder = async (req, res) => {
 
 // Get all orders for the logged-in user
 const getAllOrder = async (req, res) => {
-  // const userId = req.userId; // User ID from the auth middleware
-
   try {
     // Fetch only the orders for the logged-in user
-    const orders = await orderModel.find({ }).sort({ createdAt: -1 }); // Sort by latest first
+    const orders = await orderModel.find({}).sort({ createdAt: -1 }); // Sort by latest first
     res.json({ success: true, data: orders });
   } catch (err) {
     console.error(err);
@@ -40,11 +41,10 @@ const getAllOrder = async (req, res) => {
 
 // Update order status
 const updateStatus = async (req, res) => {
-  const { orderId, status } = req.body;
 
   try {
     // Update the order's status based on the order ID
-    await orderModel.findByIdAndUpdate(orderId, { status });
+    await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
     res.json({ success: true, message: "Status updated successfully." });
   } catch (error) {
     console.log(error);
@@ -52,6 +52,18 @@ const updateStatus = async (req, res) => {
   }
 };
 
+
+//user order one user
+// const userOrders=async(req,res)=>{
+//   try{
+// const orders=await orderModel.find({userId:req.userId});
+// res.json({success:true,data:orders})
+//   }catch(error){
+//     console.log(error);
+//     res.json({success:false,message:"error"})
+
+//   }
+// }
 export { placeOrder, getAllOrder, updateStatus };
 
 

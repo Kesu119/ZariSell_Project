@@ -6,12 +6,12 @@ import { toast } from 'react-toastify';
 const Orders = () => {
   const [order, setOrder] = useState([]);
   
-  useEffect(() => {
+  
     const fetchOrders = async () => {
-      const token = localStorage.getItem('token'); // Get the token from localStorage
+      const token = localStorage.getItem('token'); 
       
       if (!token) {
-        toast.error('You need to be logged in to view orders');
+        toast.error('You need to be log in to view orders');
         return;
       }
       
@@ -34,32 +34,54 @@ const Orders = () => {
       }
     };
 
-    fetchOrders();
-  }, []);
+          const statusHandler=async(event,orderId)=>{    
+            const response=await axios.post("http://localhost:5000/api/order/status",{
+              orderId,
+              status:event.target.value
+            })
+            if(response.data.success){
+              await fetchOrders();
+            }
+          }
+
+          useEffect(() => {
+            fetchOrders(); 
+          }, []);
 
   return (
     <div className="list add flex-col">
       <p className="pname">All User Orders List</p>
       <div className="list-table">
         <div className="list-tbl-formt title">
+          <b>User Name</b>
+          <b>Email</b>
+          <b>Phone</b>
           <b>Product Name</b>
           <b>Quantity</b>
           <b>Amount</b>
           <b>Address</b>
-          <b>Status</b>
+          {/* <b>Status</b> */}
           <b>Date</b>
-          <b>Payment Mode</b>
+          {/* <b>Payment Mode</b> */}
         </div>
 
         {order.map((zariOrder) => (
           <div key={zariOrder._id} className="list-tbl-formt">
+            <p>{zariOrder.username}</p>
+            <p>{zariOrder.email}</p>
+            <p>{zariOrder.phone}</p>
             <p>{zariOrder.productname}</p>
             <p>{zariOrder.qty}</p>
             <p>{zariOrder.amount}</p>
             <p>{zariOrder.address}</p>
-            <p>{zariOrder.status}</p>
+            {/* <p>{zariOrder.status}</p> */}
             <p>{zariOrder.date}</p>
-            <p>{zariOrder.paymode}</p>
+            {/* <p>{zariOrder.paymode}</p> */}
+            <p><select onChange={(event)=>statusHandler(event,zariOrder._id)} value={zariOrder.status}>
+              <option value="product proccessing">processing</option>
+              <option value="Out for Delivery">Out for Delivery</option>
+              <option value="Deliver">Deliver</option>
+              </select></p>
           </div>
         ))}
       </div>

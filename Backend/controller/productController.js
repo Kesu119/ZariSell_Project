@@ -6,10 +6,10 @@ const addProduct=async(req,res)=>{
 let image_filename=`${req.file.filename}`;
 const product =new productModel({
     name:req.body.name,
-    // description:req.body.description,
+    description:req.body.description,
     // qty:req.body.qty,
     price:req.body.price,
-    category:req.body.category,
+    // category:req.body.category,
     // city:req.body.city,
     // country:req.body.country,
     image:image_filename
@@ -66,7 +66,7 @@ const updateProduct=async(req,res)=>{
         const updatedProduct=await productModel.findByIdAndUpdate(req.body.id,{
             name:req.body.name,
             price:req.body.price,
-            category:req.body.category,
+            description:req.body.description,
             image:image_filename
         },{new:true});
         res.json({success:"product update done",data:updatedProduct})

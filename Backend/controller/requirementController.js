@@ -3,8 +3,19 @@ import requirementModel from "../models/requirementModel.js";
 
 //add user requirement
 const userRequirement=async(req,res)=>{
-    const {fullname,email,phone,meeting,packing,packing2,additional}=req.body;
+    const {fullname,email,phone,meeting,packing,packing2,additional,meetingDate,meetingTime,onlinePlatform,meetingLink}=req.body;
     const userId= req.userId;
+
+    if (meeting === "Offline") {
+      if (!meetingDate || !meetingTime) {
+        return res.status(400).json({ success: false, message: "Please provide both meeting date and time for offline meetings." });
+      }
+    } else if (meeting === "Online") {
+      if (!onlinePlatform || !meetingLink) {
+        return res.status(400).json({ success: false, message: "Please provide both online platform and meeting link for online meetings." });
+      }
+    }
+
     try{
     const RequirementOrder=new requirementModel({
         userId,
@@ -12,6 +23,7 @@ const userRequirement=async(req,res)=>{
         email,
         phone,
         meeting,
+       meetingDate,meetingTime,meetingLink,onlinePlatform,
         packing,
         packing2,
         additional,

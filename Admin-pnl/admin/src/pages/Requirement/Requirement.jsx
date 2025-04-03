@@ -13,7 +13,7 @@ const Requirement = () => {
           const token = localStorage.getItem('token');
 
           if (!token) {
-                  toast.error('You need to be logged in to view Reuirement');
+                  toast.error('You need to be log in to view Requirement');
                   return;
                 }
       try{
@@ -48,6 +48,10 @@ const Requirement = () => {
         <b>Email</b>
         <b>Phone No.</b>
         <b>Meeting Type</b>
+        <b>Meeting Date</b>
+        <b>Meeting Time</b>
+        <b>Online platform</b>
+        <b>Meeting Link</b>
         <b>Packing</b>
         <b>Packing(gm)</b>
         <b>Additionl</b>
@@ -60,6 +64,10 @@ const Requirement = () => {
               <p>{product.email}</p>
               <p>{product.phone}</p>
               <p>{product.meeting}</p>
+              <p>{product.meetingDate}</p>
+              <p>{product.meetingTime}</p>
+              <p>{product.onlinePlatform}</p>
+              <p>{product.meetingLink}</p>
               <p>{product.packing}</p>
               <p>{product.packing2}</p>
               <p>{product.additional}</p>

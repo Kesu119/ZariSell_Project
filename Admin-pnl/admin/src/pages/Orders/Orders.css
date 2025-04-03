@@ -1,12 +1,12 @@
 .list-tbl-formt select{
     display: grid;
-    grid-template-columns:0.5fr 0.5fr 0.5fr 0.5fr 1fr 1fr 2fr;
+    grid-template-columns:0.5fr 1fr 1fr 0.5fr 1fr 1fr 2fr;
     align-items: center;
     gap:0px;
     padding: 12px 15px;
     border:1px solid gray;
     font-size: 13px;
-    width:110;
+    width:110px;
 }
 .list-table .title {
     background-color:darkgoldenrod;

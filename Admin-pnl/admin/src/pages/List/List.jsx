@@ -12,7 +12,8 @@ const List = ({url}) => {
   const [data,setData]=useState({
     name: '',
     price: '',
-    category: ''
+    description: '',
+    image:null
   });
 
   const fetchList=async()=>{
@@ -43,13 +44,39 @@ const List = ({url}) => {
     setEdit(product._id);
     setData({name:product.name,
       price:product.price,
-      category:product.category,
+      description:product.description,
+      // category:product.category,
+      image:null
        });
     };
+
+    // Handle image change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setData({ ...data, image: file });
+    }
+  };
     
     //product update code
     const handleUpdate=async()=>{
-      const response=await axios.post(`${url}/api/product/update`,{id:edit,...data});
+
+      const formData = new FormData();
+    formData.append('id', edit);
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('description',data.description);
+    // formData.append('category', data.category);
+
+    // If an image is selected, append it to the FormData
+    if (data.image) {
+      formData.append('image', data.image);
+    }
+      const response=await axios.post(`${url}/api/product/update`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       if(response.data.success){
         toast.success("product updated");
         setEdit(null);
@@ -70,8 +97,8 @@ const List = ({url}) => {
       <div className='list-tbl-formt title'>
         <b>Image</b>
         <b>Name</b>
-        {/* <b>Description</b> */}
-        <b>Category</b>
+        <b>Description</b>
+        {/* <b>Category</b> */}
         {/* <b>Qty</b> */}
         <b>price</b>
         <b>Action</b>
@@ -82,8 +109,8 @@ const List = ({url}) => {
             <div key={index} className='list-tbl-formt'>
               <img src={`${url}/images/`+product.image}/>
               <p>{product.name}</p>
-              {/* <p>{product.description}</p> */}
-              <p>{product.category}</p>
+              <p>{product.description}</p>
+              {/* <p>{product.category}</p> */}
               {/* <p>{product.qty}</p> */}
               <p>₹{product.price}</p>
               <p onClick={()=>removeProduct(product._id)} className='cursor'><img src={assets.remove2}></img></p>
@@ -112,11 +139,17 @@ const List = ({url}) => {
           <br/>
           <input
             type="text"
-            value={data.category}
-            onChange={(e) => setData({ ...data, category: e.target.value })}
-            placeholder="Product Category"
+            value={data.description}
+            onChange={(e) => setData({ ...data, description: e.target.value })}
+            placeholder="Product description"
           />
           <br/>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          <br />
           <button onClick={handleUpdate}>Update Product</button>
         </div>
       )}
