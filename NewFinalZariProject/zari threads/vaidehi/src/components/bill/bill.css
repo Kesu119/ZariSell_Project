@@ -1,0 +1,175 @@
+/* General Styles */
+.container10 {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  background: #f8f9fa;
+  background-color: rgb(248, 223, 84);
+  border-radius: 20px;
+}
+
+/* Invoice Box */
+.invoice-box {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  border-bottom: 2px solid goldenrod;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header-section h2 {
+  margin: 0;
+  color: goldenrod;
+  font-size: 24px;
+}
+
+.header-section p {
+  font-size: 14px;
+  color: #555;
+  color: black;
+}
+
+/* Details Section */
+.details-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.details-left p,
+.details-right p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: black;
+}
+
+/* Table Styles */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  color: black;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.invoice-table th {
+  background: goldenrod;
+  color: white;
+  font-weight: bold;
+}
+
+.invoice-table td {
+  font-size: 14px;
+}
+
+/* Amount Summary */
+.amount-summary {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.amount-summary p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: black;
+}
+
+/* Terms Section */
+.terms-section {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.terms-section h3 {
+  font-size: 16px;
+  color: #007bff;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* Signature */
+.signature-section {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Button */
+.btn-primary ,.btn-secondary{
+  background: goldenrod;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.btn-primary:hover,.btn-secondary:hover {
+  background: goldenrod;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container10 {
+      padding: 15px;
+  }
+  
+  .invoice-box {
+      padding: 20px;
+  }
+
+  .details-section {
+      flex-direction: column;
+  }
+
+  .invoice-table th, .invoice-table td {
+      padding: 1px;
+      font-size: 11px;
+  }
+
+  .btn-primary {
+      font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-section h2 {
+      font-size: 20px;
+  }
+
+  .invoice-box {
+      padding: 15px;
+  }
+
+  .details-section {
+      text-align: center;
+  }
+
+  .amount-summary p {
+      font-size: 12px;
+  }
+}
+

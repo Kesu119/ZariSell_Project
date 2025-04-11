@@ -1,0 +1,63 @@
+/* verify.css */
+.verify-page {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 40px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  .verify-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+  
+  .verify-success {
+    color: #28a745;
+  }
+  
+  .verify-failure {
+    color: #dc3545;
+  }
+  
+  .verify-heading {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .verify-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .verify-btn {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .verify-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+/* Navigation bar */
+.navbar
+{
+    margin: 50px 100px ;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(165, 128, 34);
+}
+.nav-menu
+{
+    font-size: 20px;
+}
+.nav-menu a{
+    padding: 10px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+    font-size: 25px;
+    text-decoration: none;
+    color: rgb(165, 128, 34);
+}
+.navbar .active
+{
+    padding-bottom: 2px;
+    border-bottom: 2px solid  rgb(165, 128, 34);
+}
+.navbar .signin{
+    background: transparent;
+    font-size: 16px;
+    color: rgb(190, 143, 24);
+    border: 1px solid rgb(154, 120, 34);
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.navbar .signin:hover{
+    background-color: rgb(245, 228, 185);
+}
+.button{
+    /* font-size:17px;
+    margin-bottom: 30px; */
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.navbar .signin{
+    background: transparent;
+    font-size: 16px;
+    color: rgb(190, 143, 24);
+    border: 1px solid rgb(154, 120, 34);
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.navbar .signin:hover{
+    background-color: rgb(245, 228, 185);
+}
+.navbar-search-icon{
+    position: relative;
+
+}
+.navbar-search-icon .dot{
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: rgb(190, 143, 24);
+    border-radius: 5px;
+    top: -8px;
+    right: -8px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left:0;
+    background-color: white;
+    width: 150px;
+    min-width: 500px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.9s;
+}
+
+.dropdown-content a:hover {
+    background-color: #9e9b9b;
+}
+
+/* Show Dropdown Menu on Hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.sign
+{
+    background-color: transparent;
+    color: goldenrod;
+    font-size: 15px;
+    border-radius: 50px;
+    padding: 5px 10px ;
+    margin: 5px;
+    
+}
+.sign:hover{
+    background-color: rgb(247, 244, 229);
+}
+
+/* Offcanvas Sidebar */
+.offcanvas {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hidden initially */
+    width: 250px;
+    height: 100%;
+    background:#d9d9d9;
+    color: white;
+    transition: 0.3s;
+    padding-top: 60px;
+}
+
+.offcanvas-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-style: italic;
+    font-weight:bolder;
+}
+.offcanvas a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+}
+select{
+    width: 100%;  
+  background: transparent; 
+  border: 1px solid white; 
+  color: white; 
+  padding: 5px; 
+  font-size: 16px;
+  transition: background-color 0.9s;
+    
+}
+
+.offcanvas a:hover {
+    background: #575757;
+}
+
+/* Button to open sidebar */
+.menu-btn {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 15px;
+    background: none;
+    border: none;
+    color: #333;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+}
+
+/* Close button inside sidebar */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.dropdown1-submenu1 {
+    position: relative;
+}
+.dropdown1-submenu1 .dropdown1-menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    display: none;
+    position: absolute;
+}
+.dropdown1-submenu1:hover .dropdown1-menu {
+    display: block;
+}
+
+/* Mobile/Tablet Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 20px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        font-size: 18px;
+    }
+
+    .button {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Adjust dropdown for smaller screens */
+    .dropdown-content {
+        width: 100%; /* Make the dropdown take full width on smaller screens */
+        min-width: 100%;
+        left: 0;
+        box-shadow: none; /* Remove the shadow for better aesthetics */
+    }
+
+    .dropdown-content a {
+        padding: 12px; /* Increase padding for easier tapping on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-menu a {
+        font-size: 16px;
+    }
+
+    .signin {
+        padding: 6px 15px;
+        font-size: 14px;
+    }
+
+    .menu-btn {
+        font-size: 20px;
+    }
+
+    /* Mobile dropdown adjustments */
+    .dropdown-content {
+        width: 100%;
+        left: 0;
+        min-width: 100%;
+        box-shadow: none;
+    }
+
+    .dropdown-content a {
+        padding: 15px 20px; /* Increase padding for better tap targets */
+    }
+}
+/* profile icon */
+.navbar-profile{
+    position: relative;
+}
+.nav-profile-dropdown{
+    position:absolute;
+    display: none;
+    right:0;
+    z-index: 1;
+}
+.navbar-profile:hover .nav-profile-dropdown{
+    display: flex;
+    flex-direction: column; 
+    gap:0px;
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 4px;
+    border:1px solid darkgoldenrod;
+    outline: 2px solid darkgoldenrod;
+    list-style:none; 
+} 
+.nav-profile-dropdown li{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    cursor: pointer;
+}
+.nav-profile-dropdown img{
+    width:25px;
+}
+.nav-profile-dropdown p:hover{
+    color:black;
+}
+.nav-profile-dropdown p{
+    color: darkgoldenrod;
+    font-size: large;
+    
+}
