@@ -98,10 +98,10 @@ const List = ({url}) => {
         <b>Image</b>
         <b>Name</b>
         <b>Description</b>
-        {/* <b>Category</b> */}
-        {/* <b>Qty</b> */}
         <b>price</b>
-        <b>Action</b>
+        <b>Delete</b>
+        <b>Edit</b>
+        
       </div>
 
       {list.map((product,index)=>{
@@ -110,8 +110,6 @@ const List = ({url}) => {
               <img src={`${url}/images/`+product.image}/>
               <p>{product.name}</p>
               <p>{product.description}</p>
-              {/* <p>{product.category}</p> */}
-              {/* <p>{product.qty}</p> */}
               <p>₹{product.price}</p>
               <p onClick={()=>removeProduct(product._id)} className='cursor'><img src={assets.remove2}></img></p>
               <p onClick={()=>handleEdit(product)} className='cursor'><img src={assets.update}></img></p>
@@ -161,18 +159,3 @@ const List = ({url}) => {
 
 export default List
 
-{/* <input
-  type="text"
-  value={data.name}
-  onChange={(e) => setData({ ...data, name: e.target.value })}
-/>
-<input
-  type="number"
-  value={data.price}
-  onChange={(e) => setData({ ...data, price: e.target.value })}
-/>
-<input
-  type="text"
-  value={data.category}
-  onChange={(e) => setData({ ...data, category: e.target.value })}
-/> */}

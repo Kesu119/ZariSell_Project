@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Requirement.css'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { assets } from '../../assets/assets'
 const Requirement = () => {
 
     const [requirements, setRequirements] = useState([]);
@@ -40,37 +41,34 @@ const Requirement = () => {
     
   return (
     
-<div className='list add flex-col'>
-  <p className='pname'>All User Requirement List</p>
-    <div className='list-table'>
-      <div className='list-tbl-formt title'>
-        <b>Full Name</b>
-        <b>Email</b>
-        <b>Phone No.</b>
-        <b>Meeting Type</b>
-        <b>Meeting Date</b>
-        <b>Meeting Time</b>
-        <b>Online platform</b>
-        <b>Meeting Link</b>
-        <b>Packing</b>
-        <b>Packing(gm)</b>
-        <b>Additionl</b>
-      </div>
-
+<div className="requirement-add">
+  <h1 className='head-name'>Requirement Page List</h1>
+    <div className="requiremnt-list">
+      
       {requirements.map((product)=>{
           return (
-            <div key={product._id} className='list-tbl-formt'>
-              <p>{product.fullname}</p>
-              <p>{product.email}</p>
-              <p>{product.phone}</p>
-              <p>{product.meeting}</p>
-              <p>{product.meetingDate}</p>
-              <p>{product.meetingTime}</p>
-              <p>{product.onlinePlatform}</p>
-              <p>{product.meetingLink}</p>
-              <p>{product.packing}</p>
-              <p>{product.packing2}</p>
-              <p>{product.additional}</p>
+            <div key={product._id} className="requirement-item">
+              <img src={assets.parcel}></img>
+              <div className='requirement-info'>
+                <b>Customer Information :----</b>
+              <p>Customer Name : {product.fullname}</p>
+              <p>Email : {product.email}</p>
+              <p>Phone No. : {product.phone}</p>
+              </div>
+              <div className='meeing-info'>
+                <b>Meeting Information :----</b>
+              <p>Meeting Type : {product.meeting}</p>
+              <p> Date : {product.meetingDate}</p>
+              <p> Time: {product.meetingTime}</p>
+              <p> Platform : {product.onlinePlatform}</p>
+              <p> Link : {product.meetingLink}</p>
+              </div>
+              <div className='product-info'>
+                <b>Product Information :----</b>
+              <p>Product Packing : {product.packing}</p>
+              <p>product per/cone : {product.packing2}</p>
+              <p>Other Info : {product.additional}</p>
+              </div>
               
             </div>
           )
@@ -83,3 +81,28 @@ const Requirement = () => {
 }
 
 export default Requirement
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className='list-tbl-formt title'>
+        <b>Full Name</b>
+        <b>Email</b>
+        <b>Phone No.</b>
+        <b>Meeting Type</b>
+        <b>Meeting Date</b>
+        <b>Meeting Time</b>
+        <b>Online platform</b>
+        <b>Meeting Link</b>
+        <b>Packing</b>
+        <b>Packing(gm)</b>
+        <b>Additionl</b>
+      </div> */}

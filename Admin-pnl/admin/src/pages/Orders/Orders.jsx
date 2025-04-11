@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Orders.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { assets } from '../../assets/assets'
 
 const Orders = () => {
   const [order, setOrder] = useState([]);
@@ -49,39 +50,36 @@ const Orders = () => {
           }, []);
 
   return (
-    <div className="list add flex-col">
-      <p className="pname">All User Orders List</p>
-      <div className="list-table">
-        <div className="list-tbl-formt title">
-          <b>User Name</b>
-          <b>Email</b>
-          <b>Phone</b>
-          <b>Product Name</b>
-          <b>Quantity</b>
-          <b>Amount</b>
-          <b>Address</b>
-          {/* <b>Status</b> */}
-          <b>Date</b>
-          {/* <b>Payment Mode</b> */}
-        </div>
-
+    <div className="order add">
+     <h1 className='title-name'>All User Orders List</h1>
+      <div className="order-list">
+       
         {order.map((zariOrder) => (
-          <div key={zariOrder._id} className="list-tbl-formt">
-            <p>{zariOrder.username}</p>
-            <p>{zariOrder.email}</p>
-            <p>{zariOrder.phone}</p>
-            <p>{zariOrder.productname}</p>
-            <p>{zariOrder.qty}</p>
-            <p>{zariOrder.amount}</p>
-            <p>{zariOrder.address}</p>
-            {/* <p>{zariOrder.status}</p> */}
-            <p>{zariOrder.date}</p>
+          <div key={zariOrder._id} className="order-item">
+            <img src={assets.parcel} alt=''></img>
+
+            <div className='order-product'>
+            <b>User Information :-----</b>
+            <p>User Name : {zariOrder.username}</p>
+            <p>Email : {zariOrder.email}</p>
+            <p>Phone No. : {zariOrder.phone}</p>
+            <p>User Address : {zariOrder.address}</p>
+            </div>
+            <div className='product-info'>
+              <b>Product Information :------</b>
+            <p>Product Name : {zariOrder.productname}</p>
+            <p>Product Qty : {zariOrder.qty}</p>
+            <p>Product Price : {zariOrder.amount}</p>
+            <p>Order Date : {zariOrder.date}</p>
+            </div>
             {/* <p>{zariOrder.paymode}</p> */}
             <p><select onChange={(event)=>statusHandler(event,zariOrder._id)} value={zariOrder.status}>
               <option value="product proccessing">processing</option>
               <option value="Out for Delivery">Out for Delivery</option>
               <option value="Deliver">Deliver</option>
-              </select></p>
+              </select>
+            </p>
+             
           </div>
         ))}
       </div>
@@ -91,187 +89,3 @@ const Orders = () => {
 
 export default Orders;
 
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import './Orders.css';
-// import axios from 'axios';
-// import { toast } from 'react-toastify';
-
-// const Orders = () => {
-//   const [order, setOrder] = useState([]);
-
-//   useEffect(() => {
-//     const fetchOrders = async () => {
-//       try {
-//         const response = await axios.get('http://localhost:5000/api/order/getorder');
-//         console.log(response.data);
-//         if (response.data.success) {
-//           setOrder(response.data.data);
-//         } else {
-//           toast.error('Error');
-//         }
-//       } catch (error) {
-//         toast.error('An error occurred while fetching orders.');
-//         console.log(error);
-//       }
-//     };
-
-//     fetchOrders(); 
-//   }, []);
-
-//   // const statusHandler=async(event,orderId)=>{
-//   //       const response=await axios.post(url+"/api/order/status",{
-//   //         orderId,
-//   //         status:event.target.value
-//   //       })
-//   //       if(response.data.success){
-//   //         await fetchAllOrders();
-//   //       }
-//   //     }
-
-//   return (
-//     <div className='list add flex-col'>
-//       <p className='pname'>All User Orders List</p>
-//       <div className='list-table'>
-//         <div className='list-tbl-formt title'>
-//           <b>Product Name</b>
-//           <b>Quantity</b>
-//           <b>Amount</b>
-//           <b>Address</b>
-//           <b>Status</b>
-//           <b>Date</b>
-//           <b>Payment Mode</b>
-//         </div>
-
-//         {order.map((zariOrder) => {
-//           return (
-//             <div key={zariOrder._id} className='list-tbl-formt'>
-//               <p>{zariOrder.productname}</p>
-//               <p>{zariOrder.qty}</p>
-//               <p>{zariOrder.amount}</p>
-//               <p>{zariOrder.address}</p>
-//               <p>{zariOrder.status}</p>
-//               <p>{zariOrder.date}</p>
-//               <p>{zariOrder.paymode}</p>
-
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Orders;
-
-
-
-{/* <p>
-              <select onChange={(event)=>statusHandler(event,order._id)} value={order.status}>
-                <option value="product processing">Product Processing</option>
-                <option value="out for delivery">Out for Delivery</option>
-                <option value="Delivered">Delivered</option>
-                </select></p> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //first code
-
-// // const Orders = () => {
-
-// //   const [orders,setOrders]=useState([]);
-
-// //   const fetchAllOrders=async()=>{
-// //      const response=await axios.get(url+"/api/order/list");
-// //     if(response.data.success){
-// //       setOrders(response.data.data);
-// //       console.log(response.data.data);
-// //     }else{
-// //       toast.error("Error")
-// //     }
-// //   }
-
-// //   const statusHandler=async(event,orderId)=>{
-// //     const response=await axios.post(url+"/api/order/status",{
-// //       orderId,
-// //       status:evnet.target.value
-// //     })
-// //     if(response.data.success){
-// //       await fetchAllOrders();
-// //     }
-
-// //   }
-// //   useEffect(()=>{
-// //     fetchAllOrders();
-// //   },[])
-
-// //   return (
-// //     <div className='order add'>
-// //       <h3>Order Page</h3>
-// //       <div className='order-list'>
-// //         {orders.map((order,index)=>(
-// //           <div key={index} className='order-item'>
-// //             <img src={assets.parcel} alt=""/>
-// //             <div>
-// //               <p className='order-item-product'>
-// //                 {order.items.map((item,index)=>{
-// //                   if(index===order.items.length-1){
-// //                     return item.name+"x"+item.quantity
-// //                   }else{
-// //                     return item.name+"x"+item.quantity+","
-// //                   }
-// //                 })}
-// //               </p>
-// //               <p className='order-item-name'>{order.address.firstName+""+order.address.lastName}</p>
-// //               <div className='order-item-address'>
-// //                 <p>{order.address.streetr + ","}</p>
-// //                 <p>{order.address.city+","+order.address.state+","+order.address.country+","+order.address.zipcode}</p>
-// //               </div>
-// //               <p className='order-item-phone'>{order.address.phone}</p>
-// //             </div>
-// //             <p>Items :{order.items.length}</p>
-// //             <p>${order.amount}</p>
-// //             <select onChange={(event)=>statusHandler(event,order._id)} value={order.status}>
-// //               <option value="product making">product Processing</option>
-// //               <option value="out for delivery">Out For Delivery</option>
-// //               <option value="Delivered">Delivered</option>
-// //             </select>
-// //           </div>
-// //         ))}
-// //       </div>
-      
-// //     </div>
-// //   )
-// // }
-
-// // export default Orders

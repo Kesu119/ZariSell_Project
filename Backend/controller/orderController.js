@@ -1,13 +1,16 @@
 import orderModel from "../models/orderModel.js";
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Placing user order
 const placeOrder = async (req, res) => {
-  const {username,email,phone, productname, qty, amount, address, status, date} = req.body;
-   const userId = req.userId; 
+  const { username, email, phone, productname, qty, amount, address, status, date } = req.body;
+  const userId = req.userId;
 
   try {
     const newOrder = new orderModel({
-       userId,
+      userId,
       username,
       email,
       phone,
@@ -17,21 +20,21 @@ const placeOrder = async (req, res) => {
       address,
       status,
       date,
-      // paymode,
+
     });
+
     await newOrder.save();
-    res.json({ success: true, message: "Order added successfully." });
+    res.json({ success: true, message: "Order added successfully.", orderId: newOrder._id });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Failed to add order." });
   }
 };
 
-// Get all orders for the logged-in user
+// Get all orders
 const getAllOrder = async (req, res) => {
   try {
-    // Fetch only the orders for the logged-in user
-    const orders = await orderModel.find({}).sort({ createdAt: -1 }); // Sort by latest first
+    const orders = await orderModel.find({}).sort({ createdAt: -1 });
     res.json({ success: true, data: orders });
   } catch (err) {
     console.error(err);
@@ -39,12 +42,10 @@ const getAllOrder = async (req, res) => {
   }
 };
 
-// Update order status
+// Update order status manually
 const updateStatus = async (req, res) => {
-
   try {
-    // Update the order's status based on the order ID
-    await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
+    await orderModel.findByIdAndUpdate(req.body.orderId, { status: req.body.status });
     res.json({ success: true, message: "Status updated successfully." });
   } catch (error) {
     console.log(error);
@@ -52,227 +53,62 @@ const updateStatus = async (req, res) => {
   }
 };
 
+// Stripe Checkout Session
+const StripePayment = async (req, res) => {
+  try {
+    const { productname, orderId } = req.body;
 
-//user order one user
-// const userOrders=async(req,res)=>{
-//   try{
-// const orders=await orderModel.find({userId:req.userId});
-// res.json({success:true,data:orders})
-//   }catch(error){
-//     console.log(error);
-//     res.json({success:false,message:"error"})
+    const line_items = productname.map(product => ({
+      price_data: {
+        currency: 'inr',
+        product_data: {
+          name: product.name,
+        },
+        unit_amount: product.price,
+      },
+      quantity: product.quantity,
+    }));
 
-//   }
-// }
-export { placeOrder, getAllOrder, updateStatus };
+    line_items.push({
+      price_data: {
+        currency: 'inr',
+        product_data: { name: "Delivery Charges" },
+      unit_amount: 200*100, // ₹2
+      },
+      quantity: 1,
+    });
 
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items,
+      mode: 'payment',
+      success_url: `http://localhost:3000/verify?success=true&orderId=${orderId}`,
+      cancel_url: `http://localhost:3000/verify?success=false&orderId=${orderId}`,
+    });
 
+    res.json({ success: true, session_url: session.url });
+  } catch (error) {
+    console.error('Stripe Error:', error);
+    res.json({ success: false, message: 'Payment session creation failed' });
+  }
+};
 
+// Payment verification handler
+const verifyPayment = async (req, res) => {
+  const { success, orderId } = req.body;
 
+  try {
+    if (success === 'true') {
+      await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      res.json({success:true,message:"paid"}); 
+    } else {
+      await orderModel.findByIdAndUpdate(orderId, { payment: false });
+      res.json({success:false,message:"Not paid"}); 
+    }
+  } catch (error) {
+    console.error('Payment Verification Error:', error);
+    res.json({ success: false, message: 'Failed to verify payment.' });
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
-// import orderModel from "../models/orderModel.js";
-// import userModel from "../models/userModel.js";
-
-// //placing user order for frontend
-// const placeOrder=async(req,res)=>{
-//     const frontend_url="http://localhost:3000";
-           
-//         const newOrder=new orderModel({
-//              userId:req.userId,
-//             productname:req.body.productname,
-//             qty:req.body.qty,
-//             amount:req.body.amount,
-//             address:req.body.address,
-//             status:req.body.status,
-//             date:req.body.date,
-//             paymode:req.body.paymode,
-//         })
-//         try {
-//             await newOrder.save();
-//             res.json({success:true,message:"order adding"})
-//        } catch (error) {
-//             console.log(error);
-//         res.json({success:false,message:" order not add"})
-//         }
-//     }
-        
-//     //get all order from frontend
-//     const getAllOrder = async (req, res) => {
-//         // const { userId } = req.body;
-//         try {
-//           const orders = await orderModel.find({}).sort({ createdAt: -1 }); // Sort by latest submission first
-//         return res.json({ success: true,data: orders});
-//         } catch (err) {
-//           console.error(err);
-//         return res.json({success: false,message: 'An error occurred while fetching the user orders'});
-//         }
-//       };
-
-//       //api for updating order status
-// const updateStatus=async(req,res)=>{
-// try {
-//     await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
-//     res.json({success:true,message:"Status updated"})
-// } catch (error) {
-//     console.log(error);
-//     res.json({success:false,message:"Error"})
-// }
-// }
-
-// export {placeOrder,getAllOrder,updateStatus}
-
-
-
-
-
-
-
-
-
-
-
-
-// //user orders for frontend
-// const userOrder=async(req,res)=>{
-// try {
-//     const orders=await orderModel.find({userId:req.body.userId})
-//     res.json({success:true,data:orders})
-// } catch (error) {
-//     console.log(error);
-//     res.json({success:false,message:"Error"})
-// }
-// }
-
-// //Listing order for admin panel
-// const listOrders= async(req,res)=>{
-// try {
-//         const orders=await orderModel.find({});
-//         res.json({success:true,data:orders})
-// } catch (error) {
-//     console.log({success:false,message:"Error"})
-// }
-// }
-
-// //api for updating order status
-// const updateStatus=async(req,res)=>{
-// try {
-//     await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
-//     res.json({success:true,message:"Status updated"})
-// } catch (error) {
-//     console.log(error);
-//     res.json({success:false,message:"Error"})
-// }
-// }
-
-
-
-
-
-//2nd code
-
-// //placing user order for frontend
-// const placeOrder=async(req,res)=>{
-//     const frontend_url="http://localhost:3000";
-//     try {
-//         const newOrder=new orderModel({
-//             userId:req.body.userId,
-//             items:req.body.items,
-//             amount:req.body.amount,
-//             address:req.body.address
-//         })
-//         await newOrder.save();
-//         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
-
-//         const line_items=req.body.items.map((item)=>({
-//             price_data:{
-//                 currency:"inr",
-//                 product_data:{
-//                     name:item.name
-//                 },
-//                 unit_amount:item.price*100*80
-//             },
-//             quantity:item.quantity
-//         }))
-
-//         line_items.push({
-//             price_data:{
-//                 currency:"inr",
-//                 product_data:{
-//                     name:"Delivery Charges"
-//                 },
-//                 unit_amount:2*100*80
-//             },
-//             quantity:1
-//         })
-
-//         const session=await Stripe.Checkout.session.create({
-//             line_items:line_items,
-//             mode:'payment',
-//             success_url:`${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
-//             cancel_url:`${frontend_url}/verify?success=false&orderId=${newOrder._id}`
-//         }) 
-//             res.json({success:true,session_url:session_url})
-//     } catch (error) {
-//         console.log(error);
-//         res.json({success:false,message:"Error"})
-//     }
-// }
-
-// const verifyOrder=async(req,res)=>{
-//     const {orderId,success}=req.body;
-//     try {
-//         if(success=="true"){
-//             await orderModel.findByIdAndUpdate(orderId,{payment:true});
-//             res.json({success:true,message:"paid"})
-//         }else{
-//             await orderModel.findByIdAndDelete(orderId);
-//             res.json({success:false,message:"Not Paid"})
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.json({success:false,message:"Error"})
-//     }
-// }
-
-// //user orders for frontend
-// const userOrder=async(req,res)=>{
-// try {
-//     const orders=await orderModel.find({userId:req.body.userId})
-//     res.json({success:true,data:orders})
-// } catch (error) {
-//     console.log(error);
-//     res.json({success:false,message:"Error"})
-// }
-// }
-
-// //Listing order for admin panel
-// const listOrders= async(req,res)=>{
-// try {
-//         const orders=await orderModel.find({});
-//         res.json({success:true,data:orders})
-// } catch (error) {
-//     console.log({success:false,message:"Error"})
-// }
-// }
-
-// //api for updating order status
-// const updateStatus=async(req,res)=>{
-// try {
-//     await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
-//     res.json({success:true,message:"Status updated"})
-// } catch (error) {
-//     console.log(error);
-//     res.json({success:false,message:"Error"})
-// }
-// }
-// export {placeOrder,verifyOrder,userOrder,listOrders,updateStatus}
+export {placeOrder,getAllOrder,updateStatus,StripePayment,verifyPayment};

@@ -11,9 +11,8 @@ const Add = ({url}) => {
   const [data,setData]=useState({
     name:"",
      description:"",
-    // qty:"",
-    price:"",
-    // category:"Limitation _Jari"
+      price:"",
+  
   })
 
   const onChangeHandler=(event)=>{
@@ -27,9 +26,7 @@ const Add = ({url}) => {
 const formData=new FormData();
 formData.append("name",data.name);
 formData.append("description",data.description);
-// formData.append("qty",Number(data.qty));
 formData.append("price",Number(data.price));
-// formData.append("category",data.category)
 formData.append("image",image);
   const response=await axios.post(`${url}/api/product/add`,formData);
   if(response.data.success){
@@ -101,25 +98,5 @@ formData.append("image",image);
 }
 
 export default Add
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

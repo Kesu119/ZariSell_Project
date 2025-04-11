@@ -1,6 +1,6 @@
 import express from "express"
 import authMiddleware from "../middleware/auth.js"
-import{getAllOrder,placeOrder, updateStatus} from "../controller/orderController.js"
+import{getAllOrder,placeOrder, StripePayment,updateStatus,verifyPayment} from "../controller/orderController.js"
 
 
 const orderRouter =express.Router();
@@ -8,7 +8,9 @@ const orderRouter =express.Router();
 orderRouter.get("/getorder",authMiddleware,getAllOrder)
 orderRouter.post("/addorder",authMiddleware,placeOrder)
 orderRouter.post("/status",updateStatus)
-// orderRouter.post("/userorders",authMiddleware,userOrders)
+orderRouter.post("/payment",StripePayment)
+ orderRouter.post("/verify",verifyPayment)
+
 export default orderRouter;
 
 
@@ -32,17 +34,4 @@ export default orderRouter;
 
 
 
-
-
-
-
-
-
-
-// orderRouter.post("/place",authMiddleware,placeOrder);
-// orderRouter.post("/verify",verifyOrder);
-// orderRouter.post("/userorders",authMiddleware,userOrder);
-// orderRouter.get('/list',listOrders);
-// orderRouter.post("/status",updateStatus);
-//import { getAllOrder, listOrders, placeOrder, updateStatus, userOrder, verifyOrder } from "../controller/orderController.js"
 

@@ -6,10 +6,20 @@ const requirementSchema=new mongoose.Schema({
     email:{type:String,required:true},
     phone:{type:String,required:true},
     meeting:{type:String,required:true},
-    meetingDate:{type:Date,default:Date.now()},
-    meetingTime:{type:String,required:true},
-    onlinePlatform:{type:String,required:true},
-    meetingLink:{type:String,required:true},
+    meetingDate: { type: Date },
+  meetingTime: { type: String },
+  onlinePlatform: {
+    type: String,
+    required: function() {
+      return this.meeting === 'Online';
+    },
+  },
+  meetingLink: {
+    type: String,
+    required: function() {
+      return this.meeting === 'Online';
+    },
+  },
     packing:{type:String,required:true},
     packing2:{type:String,required:true},
     additional:{type:String}

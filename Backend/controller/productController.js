@@ -7,11 +7,7 @@ let image_filename=`${req.file.filename}`;
 const product =new productModel({
     name:req.body.name,
     description:req.body.description,
-    // qty:req.body.qty,
     price:req.body.price,
-    // category:req.body.category,
-    // city:req.body.city,
-    // country:req.body.country,
     image:image_filename
 })
 try {
@@ -29,7 +25,7 @@ try {
     const product=await productModel.find({});
     res.json({success:true,data:product})
 } catch (error) {   
-    console.log(err);
+    console.log(error);
     res.json({success:false,message:"Error"})   
 }
 }

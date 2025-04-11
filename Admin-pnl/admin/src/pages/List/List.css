@@ -1,6 +1,6 @@
 .list-tbl-formt{
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1fr;
+    grid-template-columns: 0.7fr 1fr 1fr 0.5fr 0.5fr 0.5fr;
     align-items: center;
     gap:0px;
     padding: 12px 15px;
