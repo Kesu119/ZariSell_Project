@@ -39,6 +39,7 @@ Welcome to the Zari Selling Online Platform, a modern e-commerce solution for se
 - 🍃 MongoDB
 
  🖼️ Screenshots
+ 
 
 
 
