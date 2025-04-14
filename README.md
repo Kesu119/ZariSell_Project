@@ -40,6 +40,10 @@ Welcome to the Zari Selling Online Platform, a modern e-commerce solution for se
 
  🖼️ Screenshots
  
+![home page](https://github.com/user-attachments/assets/d8c8257a-c35a-4fc7-a025-59ee741b2fae)
+![orderpage](https://github.com/user-attachments/assets/50325e5c-014b-4dd4-8e1d-1bf20d2f27e6)
+![bill page](https://github.com/user-attachments/assets/650aa2fe-3228-4267-9c10-3c520de4fb63)
+
 
 
 
